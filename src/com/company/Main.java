@@ -66,12 +66,12 @@ public class Main
             for (fileinfo item : Mainlist)
             {
                 Path source = Paths.get((item.getMainPath()));
-                System.out.println("main "+source);
+                //System.out.println("main "+source);
 
                 for (String pth : item.getTPlist())
                 {
                     Path target = Paths.get(pth+item.name);
-                    System.out.println("target " + target);
+                    //System.out.println("target " + target);
                     File path = new File(pth);
                     //System.out.println("in "+target);
                          if(!path.exists())
@@ -82,12 +82,16 @@ public class Main
                             if(item.getNewname()!=null && !item.getNewname().isEmpty())
                             {
                                 target = Paths.get(pth+item.newname);
-                                System.out.println("new name" + target);
+                                //System.out.println("new name" + target);
                             }
                     try {
-                        Files.copy(source, target,StandardCopyOption.REPLACE_EXISTING);
-                        log(item.getName()+" скопирован в" +target );
-                        }catch (java.nio.file.FileAlreadyExistsException c){log(target +" уже существует перезаписан");}
+                        Files.copy(source, target);
+                        log(item.getName()+" скопирован в " +target );
+                        }catch (java.nio.file.FileAlreadyExistsException c)
+                                {
+                                Files.copy(source, target,StandardCopyOption.REPLACE_EXISTING);
+                                log(target +" уже существует перезаписан");
+                                }
 
                     //Files.copy(source, target , StandardCopyOption.REPLACE_EXISTING);
                     //System.out.println(item.getName());
@@ -123,9 +127,10 @@ public class Main
     public static String getxmltxtpath (File pdf)
     {
         String Path = new String();
-        if (pdf.getName().toLowerCase().contains("b2b"))
+        if (pdf.getName().toLowerCase().contains("b2b") && pdf.getName().endsWith(".pdf"))
         {
-            Path = ("c:\\test" + File.separator + FilenameUtils.getBaseName(pdf.getName()) + ".xml");
+            Path = ("c:\\test\\"+ pdf.getName().replace(".pdf",".xml")) ;
+            //System.out.println(Path);
         } else
         {
             Path = ((pdf.getPath()) + ".txt");

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Fitek.iml" filepath="$PROJECT_DIR$/Fitek.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Fitektest.iml" filepath="$PROJECT_DIR$/Fitektest.iml" />
     </modules>
   </component>
 </project>
